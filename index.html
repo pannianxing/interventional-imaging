@@ -12,9 +12,13 @@
         var pathSegmentsToKeep = 1;
         var l = window.location;
         if (l.search.indexOf('?/') === 0) {
+          var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+          if (!basePath.endsWith('/')) {
+            basePath += '/';
+          }
           l.replace(
             l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') +
+            basePath +
             l.search.slice(2).replace(/&/g, '/') +
             l.hash
           );
