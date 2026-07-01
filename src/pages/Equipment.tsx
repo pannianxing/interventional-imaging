@@ -35,7 +35,7 @@ export default function Equipment() {
     if (brand === '全部') {
       navigate('/equipment');
     } else {
-      navigate(`/equipment/${brand}`);
+      navigate(`/equipment/brand/${brand}`);
     }
   };
 
@@ -268,7 +268,10 @@ export default function Equipment() {
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>发布于 {equip.releaseDate}</span>
                     </div>
-                    <button className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors group/btn">
+                    <button
+                      onClick={() => navigate(`/equipment/detail/${equip.id}`)}
+                      className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors group/btn"
+                    >
                       查看详情
                       <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
                     </button>
