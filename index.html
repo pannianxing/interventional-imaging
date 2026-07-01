@@ -6,24 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>介入影像技术平台</title>
     <script type="module">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafrex/spa-github-pages
-      (function() {
-        var pathSegmentsToKeep = 1;
-        var l = window.location;
-        if (l.search.indexOf('?/') === 0) {
-          var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
-          if (!basePath.endsWith('/')) {
-            basePath += '/';
-          }
-          l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            basePath +
-            l.search.slice(2).replace(/&/g, '/') +
-            l.hash
-          );
-        }
-      })();
       if (import.meta.hot?.on) {
         import.meta.hot.on('vite:error', (error) => {
           if (error.err) {

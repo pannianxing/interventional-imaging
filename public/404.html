@@ -2,23 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Single Page Apps for GitHub Pages</title>
+    <title>介入影像技术平台</title>
     <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafrex/spa-github-pages
-      var pathSegmentsToKeep = 1; // Keep one segment (interventional-imaging)
+      // GitHub Pages 404 重定向到 Hash 路由
       var l = window.location;
-      var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
-      if (!basePath.endsWith('/')) {
-        basePath += '/';
+      var path = l.pathname.replace(/^\/interventional-imaging\/?/, '');
+      if (path && path !== '') {
+        l.replace('/interventional-imaging/#/' + path + l.search + l.hash);
+      } else {
+        l.replace('/interventional-imaging/');
       }
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        basePath + '?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/') +
-        l.search +
-        l.hash
-      );
     </script>
   </head>
   <body></body>

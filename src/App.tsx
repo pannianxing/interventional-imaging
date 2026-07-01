@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
 import Technology from "@/pages/Technology";
@@ -15,7 +15,7 @@ import Search from "@/pages/Search";
 
 export default function App() {
   return (
-    <Router basename="/interventional-imaging/">
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
