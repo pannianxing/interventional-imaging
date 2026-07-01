@@ -12,7 +12,7 @@ import Search from "@/pages/Search";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/interventional-imaging/">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
