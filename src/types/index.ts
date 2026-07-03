@@ -43,6 +43,7 @@ export interface Equipment {
   releaseDate: string;
   sourceUrl?: string;
   sourceName?: string;
+  content?: string;
 }
 
 export interface Expert {

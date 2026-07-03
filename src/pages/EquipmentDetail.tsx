@@ -12,9 +12,76 @@ import {
   MonitorSmartphone,
   Calendar,
   ExternalLink,
+  BookOpen,
 } from 'lucide-react';
 import { equipments, brands } from '../data/mockData';
 import type { Equipment } from '../types';
+
+const renderMarkdown = (content: string) => {
+  const lines = content.split('\n');
+  const elements: React.ReactNode[] = [];
+  let key = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (line.startsWith('## ')) {
+      elements.push(
+        <h2 key={key++} className="text-2xl font-bold text-slate-800 mt-8 mb-4 pb-2 border-b border-slate-200">
+          {line.replace('## ', '')}
+        </h2>
+      );
+    } else if (line.startsWith('### ')) {
+      elements.push(
+        <h3 key={key++} className="text-xl font-semibold text-slate-800 mt-6 mb-3">
+          {line.replace('### ', '')}
+        </h3>
+      );
+    } else if (line.startsWith('**') && line.endsWith('**')) {
+      elements.push(
+        <p key={key++} className="text-slate-700 font-semibold leading-relaxed mb-4">
+          {line.replace(/\*\*/g, '')}
+        </p>
+      );
+    } else if (line.startsWith('- ')) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].startsWith('- ')) {
+        items.push(lines[i].replace('- ', ''));
+        i++;
+      }
+      i--;
+      elements.push(
+        <ul key={key++} className="list-disc list-inside space-y-2 my-4 text-slate-600">
+          {items.map((item, idx) => (
+            <li key={idx}>{item.replace(/\*\*/g, '')}</li>
+          ))}
+        </ul>
+      );
+    } else if (/^\d+\.\s/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+        items.push(lines[i].replace(/^\d+\.\s/, ''));
+        i++;
+      }
+      i--;
+      elements.push(
+        <ol key={key++} className="list-decimal list-inside space-y-2 my-4 text-slate-600">
+          {items.map((item, idx) => (
+            <li key={idx}>{item.replace(/\*\*/g, '')}</li>
+          ))}
+        </ol>
+      );
+    } else if (line.trim() !== '') {
+      elements.push(
+        <p key={key++} className="text-slate-600 leading-relaxed mb-4">
+          {line.replace(/\*\*/g, '')}
+        </p>
+      );
+    }
+  }
+
+  return elements;
+};
 
 const brandColors: Record<string, string> = {
   '飞利浦': 'from-blue-500 to-cyan-500',
@@ -277,6 +344,18 @@ export default function EquipmentDetail() {
                 ))}
               </div>
             </div>
+
+            {equipment.content && (
+              <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 lg:p-8">
+                <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-blue-600" />
+                  详细介绍
+                </h2>
+                <div className="prose-content">
+                  {renderMarkdown(equipment.content)}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">
