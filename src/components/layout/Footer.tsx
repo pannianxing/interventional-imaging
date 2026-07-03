@@ -67,22 +67,22 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">厂商专区</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link to="/equipment/飞利浦" className="hover:text-blue-400 transition-colors">
+                <Link to="/equipment/brand/飞利浦" className="hover:text-blue-400 transition-colors">
                   飞利浦医疗
                 </Link>
               </li>
               <li>
-                <Link to="/equipment/西门子" className="hover:text-blue-400 transition-colors">
+                <Link to="/equipment/brand/西门子" className="hover:text-blue-400 transition-colors">
                   西门子医疗
                 </Link>
               </li>
               <li>
-                <Link to="/equipment/联影" className="hover:text-blue-400 transition-colors">
+                <Link to="/equipment/brand/联影" className="hover:text-blue-400 transition-colors">
                   联影医疗
                 </Link>
               </li>
               <li>
-                <Link to="/equipment/GE医疗" className="hover:text-blue-400 transition-colors">
+                <Link to="/equipment/brand/GE医疗" className="hover:text-blue-400 transition-colors">
                   GE医疗
                 </Link>
               </li>

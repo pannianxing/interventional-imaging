@@ -11,9 +11,76 @@ import {
   Clock,
   Newspaper,
   Users,
+  ExternalLink,
 } from 'lucide-react';
 import { wechatArticles, wechatAccounts } from '../data/mockData';
 import type { WechatArticle } from '../types';
+
+const renderMarkdown = (content: string) => {
+  const lines = content.split('\n');
+  const elements: React.ReactNode[] = [];
+  let key = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (line.startsWith('## ')) {
+      elements.push(
+        <h2 key={key++} className="text-2xl font-bold text-slate-800 mt-8 mb-4 pb-2 border-b border-slate-200">
+          {line.replace('## ', '')}
+        </h2>
+      );
+    } else if (line.startsWith('### ')) {
+      elements.push(
+        <h3 key={key++} className="text-xl font-semibold text-slate-800 mt-6 mb-3">
+          {line.replace('### ', '')}
+        </h3>
+      );
+    } else if (line.startsWith('**') && line.endsWith('**')) {
+      elements.push(
+        <p key={key++} className="text-slate-700 font-semibold leading-relaxed mb-4">
+          {line.replace(/\*\*/g, '')}
+        </p>
+      );
+    } else if (line.startsWith('- ')) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].startsWith('- ')) {
+        items.push(lines[i].replace('- ', ''));
+        i++;
+      }
+      i--;
+      elements.push(
+        <ul key={key++} className="list-disc list-inside space-y-2 my-4 text-slate-600">
+          {items.map((item, idx) => (
+            <li key={idx}>{item.replace(/\*\*/g, '')}</li>
+          ))}
+        </ul>
+      );
+    } else if (/^\d+\.\s/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+        items.push(lines[i].replace(/^\d+\.\s/, ''));
+        i++;
+      }
+      i--;
+      elements.push(
+        <ol key={key++} className="list-decimal list-inside space-y-2 my-4 text-slate-600">
+          {items.map((item, idx) => (
+            <li key={idx}>{item.replace(/\*\*/g, '')}</li>
+          ))}
+        </ol>
+      );
+    } else if (line.trim() !== '') {
+      elements.push(
+        <p key={key++} className="text-slate-600 leading-relaxed mb-4">
+          {line.replace(/\*\*/g, '')}
+        </p>
+      );
+    }
+  }
+
+  return elements;
+};
 
 export default function WechatArticleDetail() {
   const { id } = useParams<{ id: string }>();
@@ -131,15 +198,22 @@ export default function WechatArticleDetail() {
                 </div>
 
                 <div className="prose-content">
-                  <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4 pb-2 border-b border-slate-200">
-                    文章内容
-                  </h2>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    {article.summary}
-                  </p>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                    本文由 {account?.name || '相关公众号'} 原创发布，内容仅供学习参考。如需获取完整文章内容，请关注对应公众号查看原文。
-                  </p>
+                  {article.content ? (
+                    renderMarkdown(article.content)
+                  ) : (
+                    <>
+                      <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-4 pb-2 border-b border-slate-200">
+                        文章内容
+                      </h2>
+                      <p className="text-slate-600 leading-relaxed mb-4">
+                        {article.summary}
+                      </p>
+                      <p className="text-slate-600 leading-relaxed mb-4">
+                        本文由 {account?.name || '相关公众号'} 原创发布，内容仅供学习参考。如需获取完整文章内容，请关注对应公众号查看原文。
+                      </p>
+                    </>
+                  )}
+
                   <div className="bg-slate-50 rounded-lg p-6 mt-6">
                     <p className="text-slate-600 text-sm leading-relaxed">
                       <span className="font-semibold text-slate-700">温馨提示：</span>
@@ -147,6 +221,36 @@ export default function WechatArticleDetail() {
                       点击下方按钮可查看更多相关文章。
                     </p>
                   </div>
+
+                  {article.sourceName && (
+                    <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                          <ExternalLink className="w-4 h-4 text-amber-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-amber-800 mb-1">转载来源</p>
+                          <p className="text-sm text-amber-700">
+                            来源：{article.sourceName}
+                            {article.sourceUrl && (
+                              <a
+                                href={article.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-2 text-amber-600 hover:text-amber-700 underline underline-offset-2 inline-flex items-center gap-1"
+                              >
+                                查看原文
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            )}
+                          </p>
+                          <p className="text-xs text-amber-600 mt-1">
+                            本文内容仅供学习交流，版权归原作者所有。如有侵权，请联系我们删除。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-10 pt-8 border-t border-slate-200">

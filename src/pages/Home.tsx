@@ -187,7 +187,7 @@ export default function Home() {
             {brands.map((brand) => (
               <button
                 key={brand}
-                onClick={() => navigate(`/equipment/${brand}`)}
+                onClick={() => navigate(`/equipment/brand/${brand}`)}
                 className="p-6 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-md transition-all duration-300 text-center group border border-slate-100 hover:border-blue-200"
               >
                 <div className="w-16 h-16 mx-auto mb-3 rounded-xl bg-white shadow-sm flex items-center justify-center group-hover:shadow-md transition-shadow">

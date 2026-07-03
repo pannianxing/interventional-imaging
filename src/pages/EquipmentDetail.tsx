@@ -11,6 +11,7 @@ import {
   ArrowLeftRight,
   MonitorSmartphone,
   Calendar,
+  ExternalLink,
 } from 'lucide-react';
 import { equipments, brands } from '../data/mockData';
 import type { Equipment } from '../types';
@@ -327,6 +328,36 @@ export default function EquipmentDetail() {
               </div>
             </div>
 
+            {equipment.sourceName && (
+              <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border border-amber-200 p-5">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <ExternalLink className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-amber-800 text-sm mb-2">信息来源</h4>
+                    <p className="text-sm text-amber-700 mb-2">
+                      {equipment.sourceName}
+                    </p>
+                    {equipment.sourceUrl && (
+                      <a
+                        href={equipment.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700 font-medium underline underline-offset-2"
+                      >
+                        查看原文链接
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
+                    <p className="text-xs text-amber-600 mt-2">
+                      产品信息仅供参考，以厂商官方发布为准
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {relatedEquipments.length > 0 && (
               <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
                 <h3 className="font-semibold text-slate-800 mb-4">同品牌其他设备</h3>
@@ -356,7 +387,7 @@ export default function EquipmentDetail() {
                   ))}
                 </div>
                 <button
-                  onClick={() => navigate(`/equipment/${equipment.brand}`)}
+                  onClick={() => navigate(`/equipment/brand/${equipment.brand}`)}
                   className="w-full mt-4 pt-4 border-t border-slate-100 text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center justify-center gap-1"
                 >
                   查看全部

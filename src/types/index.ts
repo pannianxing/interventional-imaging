@@ -23,6 +23,7 @@ export interface CaseItem {
   patientInfo: string;
   diagnosis: string;
   treatment: string;
+  content: string;
   images: string[];
   author: string;
   publishDate: string;
@@ -40,6 +41,8 @@ export interface Equipment {
   features: string[];
   images: string[];
   releaseDate: string;
+  sourceUrl?: string;
+  sourceName?: string;
 }
 
 export interface Expert {
@@ -79,9 +82,12 @@ export interface WechatArticle {
   title: string;
   summary: string;
   coverImage: string;
+  content?: string;
   publishDate: string;
   views: number;
   category: string;
+  sourceUrl?: string;
+  sourceName?: string;
 }
 
 export type SearchCategory = 'all' | 'technology' | 'cases' | 'equipment' | 'experts' | 'wechat';
