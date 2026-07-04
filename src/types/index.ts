@@ -91,6 +91,16 @@ export interface WechatArticle {
   sourceName?: string;
 }
 
+export interface DailyPush {
+  id: string;
+  date: string;
+  title: string;
+  summary: string;
+  content: string;
+  consensusCount: number;
+  newsCount: number;
+}
+
 export type SearchCategory = 'all' | 'technology' | 'cases' | 'equipment' | 'experts' | 'wechat';
 
 export interface SearchResult {

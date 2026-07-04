@@ -8,7 +8,7 @@ import CaseDetail from "@/pages/CaseDetail";
 import Equipment from "@/pages/Equipment";
 import EquipmentDetail from "@/pages/EquipmentDetail";
 import Experts from "@/pages/Experts";
-import ExpertArticleDetail from "@/pages/ExpertArticleDetail";
+import DailyPush from './pages/DailyPush';
 import Wechat from "@/pages/Wechat";
 import WechatArticleDetail from "@/pages/WechatArticleDetail";
 import Search from "@/pages/Search";
@@ -32,6 +32,7 @@ export default function App() {
           <Route path="/wechat" element={<Wechat />} />
           <Route path="/wechat/:id" element={<WechatArticleDetail />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/daily-push" element={<DailyPush />} />
         </Route>
       </Routes>
     </Router>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, FileText, MonitorSmartphone, Users, Newspaper, ChevronRight, TrendingUp, Award, Zap } from 'lucide-react';
-import { techArticles, cases, equipments, experts, wechatArticles, brands } from '../data/mockData';
+import { techArticles, cases, equipments, experts, wechatArticles, dailyPushes, brands } from '../data/mockData';
 import TechCard from '../components/business/TechCard';
 import CaseCard from '../components/business/CaseCard';
 import WechatCard from '../components/business/WechatCard';
@@ -332,6 +332,57 @@ export default function Home() {
                 key={article.id}
                 article={article}
               />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Daily Push */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-2">
+                <TrendingUp className="w-6 h-6 inline-block mr-2 text-blue-600" />
+                每日推送
+              </h2>
+              <p className="text-slate-500">介入放射学专家共识与行业知识每日推送</p>
+            </div>
+            <button
+              onClick={() => navigate('/daily-push')}
+              className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
+            >
+              查看全部 <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {dailyPushes.slice(0, 2).map((push) => (
+              <div
+                key={push.id}
+                onClick={() => navigate('/daily-push')}
+                className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 cursor-pointer hover:shadow-md hover:border-blue-200 transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
+                    {push.date}
+                  </span>
+                  <span className="px-2 py-0.5 bg-amber-50 text-amber-700 text-xs rounded-full">
+                    {push.consensusCount}篇共识
+                  </span>
+                  <span className="px-2 py-0.5 bg-green-50 text-green-600 text-xs rounded-full">
+                    {push.newsCount}条动态
+                  </span>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                  {push.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed line-clamp-2">
+                  {push.summary}
+                </p>
+                <div className="mt-3 flex items-center gap-1 text-blue-600 text-sm font-medium">
+                  查看详情 <ChevronRight size={14} />
+                </div>
+              </div>
             ))}
           </div>
         </div>

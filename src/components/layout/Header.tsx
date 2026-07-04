@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Menu, X, User, Stethoscope } from 'lucide-react';
+import { Search, Menu, X, User, Stethoscope, Bell } from 'lucide-react';
 
 const navItems = [
   { name: '首页', path: '/' },
@@ -9,6 +9,7 @@ const navItems = [
   { name: '厂商设备', path: '/equipment' },
   { name: '专家文章', path: '/experts' },
   { name: '公众号', path: '/wechat' },
+  { name: '每日推送', path: '/daily-push' },
 ];
 
 export default function Header() {
