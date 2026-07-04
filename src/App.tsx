@@ -9,6 +9,7 @@ import Equipment from "@/pages/Equipment";
 import EquipmentDetail from "@/pages/EquipmentDetail";
 import Experts from "@/pages/Experts";
 import DailyPush from './pages/DailyPush';
+import ExpertArticleDetail from './pages/ExpertArticleDetail';
 import Wechat from "@/pages/Wechat";
 import WechatArticleDetail from "@/pages/WechatArticleDetail";
 import Search from "@/pages/Search";
