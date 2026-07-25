@@ -17318,6 +17318,7 @@ export const dailyPushes: DailyPush[] = [  {
     consensusCount: 3,
     newsCount: 2
   },
+  {
     id: 'daily-push-2026-07-19',
     date: '2026-07-19',
     title: 'CCI 2026版肝癌TAI指南+颅内宽颈动脉瘤共识+SIR前列腺动脉栓塞指南',
